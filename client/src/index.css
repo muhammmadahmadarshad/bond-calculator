@@ -31,6 +31,8 @@
   --color-status-discount-text: #92400e;
   --color-status-par-bg: #d1fae5;
   --color-status-par-text: #065f46;
+  --color-error-bg: #fef2f2;
+  --color-error-text: #b91c1c;
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
@@ -56,6 +58,8 @@
   --color-status-discount-text: #fcd34d;
   --color-status-par-bg: #064e3b;
   --color-status-par-text: #6ee7b7;
+  --color-error-bg: #450a0a;
+  --color-error-text: #fca5a5;
   --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 

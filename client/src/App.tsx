@@ -1,6 +1,9 @@
 import { useState, useCallback } from 'react'
-import type { BondFormValues } from './lib/bondCalculations.ts'
-import { runBondCalculation } from './lib/bondCalculations.ts'
+import {
+  type BondFormValues,
+  type BondCalculationResponse,
+  calculateBond,
+} from './api/bondApi.ts'
 import { validateBondForm } from './utils/validation.ts'
 import { ThemeProvider } from './contexts/ThemeContext.tsx'
 import { Header } from './components/Header.tsx'
@@ -19,19 +22,31 @@ const INITIAL_FORM: BondFormValues = {
 
 export default function App() {
   const [form, setForm] = useState<BondFormValues>(INITIAL_FORM)
-  const [calculation, setCalculation] = useState<ReturnType<typeof runBondCalculation> | null>(null)
+  const [calculation, setCalculation] = useState<BondCalculationResponse | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const isValid = validateBondForm(form)
 
   const updateForm = useCallback(<K extends keyof BondFormValues>(key: K, value: BondFormValues[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }))
+    setError(null)
   }, [])
 
   const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
+    async (e: React.FormEvent) => {
       e.preventDefault()
       if (!isValid) return
-      setCalculation(runBondCalculation(form))
+      setLoading(true)
+      setError(null)
+      try {
+        const data = await calculateBond(form)
+        setCalculation(data)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Calculation failed')
+      } finally {
+        setLoading(false)
+      }
     },
     [form, isValid]
   )
@@ -46,7 +61,9 @@ export default function App() {
             onUpdate={updateForm}
             onSubmit={handleSubmit}
             isValid={isValid}
+            loading={loading}
           />
+          {error && <p className="app__error" role="alert">{error}</p>}
           {calculation && (
             <>
               <BondResults results={calculation.results} />

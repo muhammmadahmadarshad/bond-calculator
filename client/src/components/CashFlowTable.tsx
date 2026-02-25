@@ -1,4 +1,4 @@
-import type { CashFlowRow } from '../lib/bondCalculations.ts'
+import type { CashFlowRow } from '../api/bondApi.ts'
 import { formatCurrency } from '../utils/format.ts'
 import './CashFlowTable.css'
 

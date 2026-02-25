@@ -1,4 +1,4 @@
-import type { BondCalculationResults } from '../lib/bondCalculations.ts'
+import type { BondCalculationResults } from '../api/bondApi.ts'
 import { formatPercent, formatCurrency } from '../utils/format.ts'
 import './BondResults.css'
 
@@ -6,9 +6,14 @@ type BondResultsProps = {
   results: BondCalculationResults
 }
 
+const PREMIUM_DISCOUNT_LABELS: Record<string, string> = {
+  premium: 'Trading above face value',
+  discount: 'Trading below face value',
+  par: 'Trading at par',
+}
+
 export function BondResults({ results }: BondResultsProps) {
-  const statusLabel =
-    results.priceStatus.charAt(0).toUpperCase() + results.priceStatus.slice(1)
+  const indicatorLabel = PREMIUM_DISCOUNT_LABELS[results.priceStatus] ?? results.priceStatus
 
   return (
     <section className="bond-results">
@@ -16,14 +21,14 @@ export function BondResults({ results }: BondResultsProps) {
       <dl className="bond-results__grid">
         <dt>Current yield</dt>
         <dd>{formatPercent(results.currentYield)}</dd>
-        <dt>Yield to maturity (YTM)</dt>
+        <dt>Yield to Maturity (YTM)</dt>
         <dd>{formatPercent(results.ytm)}</dd>
-        <dt>Total interest earned</dt>
+        <dt>Total interest earned over the bond</dt>
         <dd>{formatCurrency(results.totalInterestEarned)}</dd>
-        <dt>Price status</dt>
+        <dt>Premium or discount indicator</dt>
         <dd>
           <span className={`bond-results__status bond-results__status--${results.priceStatus}`}>
-            {statusLabel}
+            {indicatorLabel}
           </span>
         </dd>
       </dl>

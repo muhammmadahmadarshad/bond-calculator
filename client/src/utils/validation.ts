@@ -1,4 +1,4 @@
-import type { BondFormValues } from '../lib/bondCalculations.ts'
+import type { BondFormValues } from '../api/bondApi.ts'
 
 export function validateBondForm(values: BondFormValues): boolean {
   return (

@@ -1,15 +1,18 @@
 import { useCallback } from 'react'
-import type { BondFormValues, CouponFrequency } from '../lib/bondCalculations.ts'
+import type { BondFormValues } from '../api/bondApi.ts'
 import './BondForm.css'
+
+type CouponFrequency = 1 | 2
 
 type BondFormProps = {
   form: BondFormValues
   onUpdate: <K extends keyof BondFormValues>(key: K, value: BondFormValues[K]) => void
   onSubmit: (e: React.FormEvent) => void
   isValid: boolean
+  loading?: boolean
 }
 
-export function BondForm({ form, onUpdate, onSubmit, isValid }: BondFormProps) {
+export function BondForm({ form, onUpdate, onSubmit, isValid, loading = false }: BondFormProps) {
   const update = useCallback(
     <K extends keyof BondFormValues>(key: K) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       const raw = e.target.value
@@ -76,8 +79,8 @@ export function BondForm({ form, onUpdate, onSubmit, isValid }: BondFormProps) {
           <option value={2}>Semi-annual</option>
         </select>
       </div>
-      <button type="submit" className="bond-form__submit" disabled={!isValid}>
-        Calculate
+      <button type="submit" className="bond-form__submit" disabled={!isValid || loading}>
+        {loading ? 'Calculating…' : 'Calculate'}
       </button>
     </form>
   )

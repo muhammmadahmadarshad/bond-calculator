@@ -1,5 +1,5 @@
 import { CashFlowTable } from './CashFlowTable.tsx'
-import type { CashFlowRow } from '../lib/bondCalculations.ts'
+import type { CashFlowRow } from '../api/bondApi.ts'
 import './CashFlowsSection.css'
 
 type CashFlowsSectionProps = {

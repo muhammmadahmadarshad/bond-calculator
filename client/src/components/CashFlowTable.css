@@ -1,0 +1,39 @@
+.cashflow-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+}
+
+.cashflow-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.cashflow-table th,
+.cashflow-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.cashflow-table th {
+  background: var(--color-surface-alt);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.cashflow-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.cashflow-table tbody tr:hover {
+  background: var(--color-surface-hover);
+}
+
+.cashflow-table td:nth-child(n + 3) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}

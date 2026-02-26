@@ -41,7 +41,7 @@ export async function calculateBond(
   body: BondFormValues
 ): Promise<BondCalculationResponse> {
   const base = getBaseUrl()
-  const res = await fetch(`${base}/bond/calculate`, {
+  const res = await fetch(`${base}/api/bond/calculate`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),

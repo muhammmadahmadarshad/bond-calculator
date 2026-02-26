@@ -81,7 +81,7 @@ VITE_API_URL=http://localhost:3000
 
 ## API
 
-- **POST** `/bond/calculate`  
+- **POST** `/api/bond/calculate`  
   **Body:** `{ faceValue, annualCouponRate, marketPrice, yearsToMaturity, couponFrequency }`  
   **Response:** `{ results: { currentYield, ytm, totalInterestEarned, priceStatus }, cashFlows: [...] }`
 

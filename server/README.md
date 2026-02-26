@@ -26,7 +26,7 @@ Default port: **3000** (override with `PORT` env var).
 
 ## API
 
-### POST `/bond/calculate`
+### POST `/api/bond/calculate`
 
 Calculates bond metrics and cash flow schedule.
 
@@ -80,7 +80,7 @@ server/
 │   └── modules/
 │       └── bond/
 │           ├── bond.module.ts
-│           ├── bond.controller.ts   # POST /bond/calculate
+│           ├── bond.controller.ts   # POST /api/bond/calculate
 │           ├── bond.service.ts     # Validation + orchestration
 │           ├── bond-calculations.ts # Pure bond math
 │           └── dto/
